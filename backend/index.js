@@ -6,6 +6,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 
 import authRouter from './routes/auth.js';
+import projectRouter from './routes/project.js';
 
 dotenv.config();
 
@@ -38,6 +39,7 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 
 app.use('/auth', authRouter);
+app.use('/project', projectRouter);
 
 app.listen(PORT, () => {
     connect();
