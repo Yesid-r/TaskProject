@@ -23,3 +23,29 @@ export const createProject = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 }
+
+export const getProjects = async (req, res) => {
+    try {
+        const projects = await Project.find({ user: req.params.userId });
+        res.status(200).json({ success: true, message:"succesfully search",data: projects });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+}
+
+export const getProject = async (req, res) => {
+    try {
+        const project = await Project.findById(req.params.projectId);
+        res.status(200).json({ success: true, message:"succesfully search",data: project });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+}
+// export const updateProject = async (req, res) => {
+//     try {
+//         const project = await Project.findByIdAndUpdate(req.params.projectId, req.body, { new: true });
+//         res.status(200).json({ success: true, message:"succesfully updated",data: project });
+//     } catch (error) {
+//         res.status(500).json({ success: false, message: error.message });
+//     }
+// }
