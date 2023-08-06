@@ -1,12 +1,19 @@
 import React, { useState } from 'react'
 import '../styles/login.css'
 import { BASE_URL, TITLE } from '../utils/constants'
+import { AuthContext } from '../context/AuthContext'
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 
 const Login = () => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+
+    const {dispatch} = useContext(AuthContext)
+    const navigate = useNavigate()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -24,7 +31,10 @@ const Login = () => {
         console.log(parsedData)
         if (parsedData.success) {
             console.log(parsedData.message)
+            dispatch({type: 'LOGIN_SUCCESS', payload: parsedData.data})
+            navigate('/')
         } else {
+            dispatch({type: 'LOGIN_FAILURE'})
             console.log(parsedData.message)
             setTimeout(() => {
                 setError('')
