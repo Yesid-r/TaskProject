@@ -7,12 +7,17 @@ import NotFound from "../components/NotFound";
 import NewTask from "../components/NewTask";
 
 import { AuthContext } from "../context/AuthContext";
+import TaskTable from "../components/TaskTable";
 
 const Routers = () => {
   const { user } = useContext(AuthContext);
 
   const renderNewTaskRoute = () => {
     return user ? <Route path="/newTask" element={<NewTask />} /> : null;
+  };
+
+  const renderTaskTableRoute = () => {
+    return user ? <Route path="/tasks" element={<TaskTable />} /> : null;
   };
 
   return (
@@ -22,6 +27,7 @@ const Routers = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
         {renderNewTaskRoute()}
+        {renderTaskTableRoute()}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

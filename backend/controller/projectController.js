@@ -3,20 +3,23 @@ import User from "../models/User.js";
 
 export const createProject = async (req, res) => {
     console.log(req.body)
+    const user = await User.findById(req.params.userId);
+    console.log(`user to project: ${user}`)
     try {
         const { name, description, status, dateEnd, dateStart } = req.body;
         console.log(req.body)
         console.log(req.params.userId)
         const user = await User.findById(req.params.userId);
+        console.log(`user to project: ${user}`)
         if (!user) {
-            res.status(404).json({ success: false, message: "User not found" });
+             res.status(404).json({ success: false, message: "User not found" });
         } else {
             const newProject = new Project({
                 name,
                 description,
                 dateStart,
                 dateEnd,
-                user: req.params.userId
+                user: user._id,
             });
             const projectSaved = await newProject.save();
             res.status(201).json({ success: true, message: "Project created successfully", data: projectSaved });

@@ -24,8 +24,8 @@ const Navbar = () => {
       current: true,
     },
     {
-      name: 'Proyectos',
-      href: 'proyectos',
+      name: 'Tareas',
+      href: 'tasks',
       current: false,
     },
     {
