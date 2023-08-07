@@ -40,45 +40,68 @@ const TaskTable = () => {
     setSelectedTask(task === selectedTask ? null : task);
   };
 
+  const closeModal = () => {
+    setSelectedTask(null);
+  };
+
+  const pendingTasks = tasks.filter((task) => task.status === "Pendiente");
+  const inProgressTasks = tasks.filter((task) => task.status === "En Progreso");
+  const completedTasks = tasks.filter((task) => task.status === "Completada");
+
   return (
-    <div className="overflow-x-auto">
-      {tasks.length > 0 ? (
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-gray-50">
-            
-          </thead>
-          <tbody className="bg-white divide-y divide-gray-200">
-            {tasks.map((task) => (
-              <React.Fragment key={task._id}>
-                <tr
-                  className="cursor-pointer hover:bg-gray-100"
-                  onClick={() => handleTaskClick(task)}
-                >
-                  <td className="px-6 py-4 whitespace-nowrap">{task.name}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {task.description}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">{task.status}</td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {task.dateStart}
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    {task.dateEnd}
-                  </td>
-                </tr>
-                {selectedTask === task && (
-                  <tr>
-                    <td colSpan="5" className="px-6 py-4">
-                      <CardTask task={task} />
-                    </td>
-                  </tr>
-                )}
-              </React.Fragment>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <h1>No hay tareas</h1>
+    <div className="container mx-auto mt-8 h-screen">
+      <div className="flex flex-wrap justify-between">
+        <div className="w-32 p-4">
+          <h2 className="text-center text-lg font-bold mb-4">Pendiente</h2>
+          {pendingTasks.map((task) => (
+            <div
+              key={task.id}
+              className="cursor-pointer hover:bg-gray-100 p-2 mb-2 rounded-md"
+              onClick={() => handleTaskClick(task)}
+            >
+              {task.name}
+            </div>
+          ))}
+        </div>
+        <div className="w-32 p-4">
+          <h2 className="text-center text-lg font-bold mb-4">En Progreso</h2>
+          {inProgressTasks.map((task) => (
+            <div
+              key={task.id}
+              className="cursor-pointer hover:bg-gray-100 p-2 mb-2 rounded-md"
+              onClick={() => handleTaskClick(task)}
+            >
+              {task.name}
+            </div>
+          ))}
+        </div>
+        <div className="w-32 p-4">
+          <h2 className="text-center text-lg font-bold mb-4">Completada</h2>
+          {completedTasks.map((task) => (
+            <div
+              key={task.id}
+              className="cursor-pointer hover:bg-gray-100 p-2 mb-2 rounded-md"
+              onClick={() => handleTaskClick(task)}
+            >
+              {task.name}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Modal */}
+      {selectedTask && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white rounded-lg p-4">
+            <CardTask task={selectedTask}  token= {token}/>
+            <button
+              className="bg-blue-500 text-white px-4 py-2 rounded mt-4"
+              onClick={closeModal}
+            >
+              Cerrar
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

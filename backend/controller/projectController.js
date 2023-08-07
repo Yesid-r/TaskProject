@@ -47,11 +47,12 @@ export const getProject = async (req, res) => {
         res.status(500).json({ success: false, message: error.message });
     }
 }
-// export const updateProject = async (req, res) => {
-//     try {
-//         const project = await Project.findByIdAndUpdate(req.params.projectId, req.body, { new: true });
-//         res.status(200).json({ success: true, message:"succesfully updated",data: project });
-//     } catch (error) {
-//         res.status(500).json({ success: false, message: error.message });
-//     }
-// }
+export const updateProject = async (req, res) => {
+    console.log(req.body)
+    try {
+        const project = await Project.findByIdAndUpdate(req.params.projectId, req.body, { new: true });
+        res.status(200).json({ success: true, message:"succesfully updated",data: project });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error.message });
+    }
+}
