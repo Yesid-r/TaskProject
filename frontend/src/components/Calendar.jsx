@@ -57,12 +57,10 @@ const Calendar = () => {
   }));
 
   return (
-    <div className="p-4 h-screen">
-      <h2 className="text-2xl font-bold mb-4">Calendario Semanal</h2>
-      <div className="grid grid-cols-8 gap-4">
-        <div className="col-span-1">
+    <div className="h-screen  flex items-center justify-center">
+      
+      <div className="grid grid-cols-8 ">
 
-        </div>
         {weekDays.map((day, index) => (
           <div key={index} className="col-span-1 border border-gray-200">
             <div className="font-bold text-center mb-2">{day.format('dddd')}</div>
