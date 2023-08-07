@@ -59,6 +59,33 @@ const CardTask = ({ task, token }) => {
 
     };
 
+    const handleDelete = async () => {
+        try {
+            const response = await fetch(`${BASE_URL}/project/deleteProject/${task._id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+            const data = await response.json();
+            console.log(data);
+            if (response.ok) {
+                setAlert([true, "Tarea eliminada"]);
+                setTimeout(() => {
+                    setAlert([null, null]);
+                }, 2000);
+            } else {
+                setAlert([false, data.message]);
+                setTimeout(() => {
+                    setAlert([null, null]);
+                }, 2000);
+            }
+        } catch (error) {
+            console.log(error);
+            setAlert([false, "Error al eliminar la tarea"]);
+        }
+    }
+
     return (
         <div>
             {
@@ -149,6 +176,11 @@ const CardTask = ({ task, token }) => {
                     </div>
                 </div>
             </form>
+            <div className="mt-4">
+                <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded" onClick={handleDelete}>
+                    Eliminar
+                </button>
+            </div>
         </div>
 
     );
