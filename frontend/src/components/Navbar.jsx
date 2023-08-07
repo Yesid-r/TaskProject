@@ -33,6 +33,12 @@ const Navbar = () => {
       href: 'newTask',
       current: false,
     },
+    {
+      name: 'Calendario',
+      href: 'calendar',
+      current: false,
+      
+    }
   ];
 
   const toggleMenu = () => {

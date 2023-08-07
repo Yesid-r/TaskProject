@@ -8,6 +8,7 @@ import NewTask from "../components/NewTask";
 
 import { AuthContext } from "../context/AuthContext";
 import TaskTable from "../components/TaskTable";
+import Calendar from "../components/Calendar";
 
 const Routers = () => {
   const { user } = useContext(AuthContext);
@@ -19,6 +20,9 @@ const Routers = () => {
   const renderTaskTableRoute = () => {
     return user ? <Route path="/tasks" element={<TaskTable />} /> : null;
   };
+  const renderCalendarRoute = () => {
+    return user ? <Route path="/calendar" element={<Calendar />} /> : null;
+  };
 
   return (
     <Routes>
@@ -28,6 +32,7 @@ const Routers = () => {
       <Route path="/register" element={<Register />} />
         {renderNewTaskRoute()}
         {renderTaskTableRoute()}
+        {renderCalendarRoute()}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );

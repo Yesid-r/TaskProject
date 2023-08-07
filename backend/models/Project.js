@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import moment from 'moment';
+
 
 const projectSchema = new mongoose.Schema({
     name: {
@@ -35,4 +37,21 @@ const projectSchema = new mongoose.Schema({
     },
 
 }, { timestamps: true });
-export default mongoose.model("Project", projectSchema);
+
+projectSchema.pre('save', async function (next) {
+    try {
+        const now = new Date();
+        this.dateStart = moment.utc(this.dateStart).toDate();
+        this.dateEnd = moment.utc(this.dateEnd).toDate();
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
+
+// Organiza los hooks usando mongoose-hook-organizer
+// projectSchema.plugin(organizer);
+
+
+
+export default mongoose.model('Project', projectSchema);
