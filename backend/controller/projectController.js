@@ -2,8 +2,10 @@ import Project from "../models/Project.js";
 import User from "../models/User.js";
 
 export const createProject = async (req, res) => {
+    console.log(req.body)
     try {
-        const { name, description, status, dateEnd } = req.body;
+        const { name, description, status, dateEnd, dateStart } = req.body;
+        console.log(req.body)
         console.log(req.params.userId)
         const user = await User.findById(req.params.userId);
         if (!user) {
@@ -12,6 +14,7 @@ export const createProject = async (req, res) => {
             const newProject = new Project({
                 name,
                 description,
+                dateStart,
                 dateEnd,
                 user: req.params.userId
             });

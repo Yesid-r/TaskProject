@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../styles/login.css'
 import { BASE_URL, TITLE } from '../utils/constants'
 import { AuthContext } from '../context/AuthContext'
 import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-
+import Cookies from 'js-cookie'
 
 const Login = () => {
+
+
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -31,6 +33,10 @@ const Login = () => {
         console.log(parsedData)
         if (parsedData.success) {
             console.log(parsedData.message)
+            console.log(parsedData.token)
+            
+            Cookies.set('accesToken', parsedData.token, { expires: 1, path: '/' });
+
             dispatch({type: 'LOGIN_SUCCESS', payload: parsedData.data})
             navigate('/')
         } else {
@@ -47,16 +53,8 @@ const Login = () => {
     return (
         <>
             <div class="h-screen flex">
-                <div class="hidden lg:flex w-full lg:w-1/2 login_img_section
-          justify-around items-center">
-                    <div
-                        class=" 
-                  bg-black 
-                  opacity-20 
-                  inset-0 
-                  z-0"
-                    >
-
+                <div class="hidden lg:flex w-full lg:w-1/2 bg-gray-900  justify-around items-center">
+                    <div class="bg-black opacity-20 inset-0 z-0">
                     </div>
                     <div class="w-full mx-auto px-20 flex-col items-center space-y-6">
                         <h1 class="text-white font-bold text-4xl font-sans">{TITLE}</h1>
@@ -66,7 +64,7 @@ const Login = () => {
                         </div>
                     </div>
                 </div>
-                <div class="flex w-full lg:w-1/2 justify-center items-center bg-white space-y-8">
+                <div class="flex w-full lg:w-1/2 justify-center items-center bg-white  space-y-8">
 
                     <div class="w-full px-8 md:px-32 lg:px-24">
                     {
@@ -83,7 +81,7 @@ const Login = () => {
                         
                                     </path>
                                 </svg>
-                            </span>
+                            </span> 
                         </div>
                         
                     }

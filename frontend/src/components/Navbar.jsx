@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,29 +11,26 @@ const Navbar = () => {
   const { user, dispatch } = useContext(AuthContext)
   user ? console.log(user) : console.log('no user')
   const logout = () => {
+    Cookies.set('accesToken', '', { expires: 1, path: '/' });
+    console.log(`cookies removed ${Cookies.get('accesToken')}`)
     dispatch({ type: 'LOGOUT' })
     navigate('/')
   }
 
   const navigation = [
     {
-      name: 'Dashboard',
+      name: 'Inicio',
       href: '/',
       current: true,
     },
     {
-      name: 'Team',
-      href: 'team',
+      name: 'Proyectos',
+      href: 'proyectos',
       current: false,
     },
     {
-      name: 'Projects',
-      href: 'projects',
-      current: false,
-    },
-    {
-      name: 'Calendar',
-      href: 'calendar',
+      name: 'Nueva tarea',
+      href: 'newTask',
       current: false,
     },
   ];
@@ -51,7 +49,7 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className="bg-gray-700">
+      <nav className="bg-gray-900">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -99,7 +97,7 @@ const Navbar = () => {
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
-                  {navigation.map((item) => (
+                  {user? navigation.map((item) => (
                     <a
                       key={item.name}
                       href={item.href}
@@ -112,7 +110,8 @@ const Navbar = () => {
                     >
                       {item.name}
                     </a>
-                  ))}
+                  )): null
+                }
                 </div>
               </div>
             </div>

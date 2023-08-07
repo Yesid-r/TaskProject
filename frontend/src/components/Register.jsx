@@ -36,7 +36,7 @@ const Register = () => {
     return (
         <div class="h-screen md:flex">
             <div
-                class="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
+                class="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-gray-800 to-gray-900 i justify-around items-center hidden">
                 <div>
                     <h1 class="text-white font-bold text-4xl font-sans">{TITLE}</h1>
                     <p class="text-white mt-1"></p>

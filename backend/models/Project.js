@@ -24,9 +24,9 @@ const projectSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
     },
-    date:{
+    dateStart:{
         type: Date,
-        default: Date.now
+        required: true,
 
     },
     dateEnd:{
