@@ -8,7 +8,7 @@ const NewTask = () => {
   const { user, dispatch } = useContext(AuthContext);
 
   const [alert, setAlert] = useState(null);
-  const token = Cookies.get('accessToken');
+  const token = Cookies.get('accesToken');
   console.log("🚀 ~ file: NewTask.jsx:23 ~ handleSubmit ~ token:", token)
 
   const [taskData, setTaskData] = useState({
@@ -21,7 +21,7 @@ const NewTask = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const token = Cookies.get('accessToken');
+    const token = Cookies.get('accesToken');
     console.log("🚀 ~ file: NewTask.jsx:23 ~ handleSubmit ~ token:", token)
     
     const response = await fetch(`${BASE_URL}/project/createProject/64cfb11f064e1cdb01c84dee`, {
