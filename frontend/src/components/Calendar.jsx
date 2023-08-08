@@ -12,7 +12,7 @@ const timeZone = 'America/Bogota';
 const Calendar = () => {
   const [tasks, setTasks] = useState([]);
   const { user } = useContext(AuthContext);
-  const token = Cookies.get('accessToken');
+  const token = Cookies.get('accesToken');
   const id = user._id;
 
   useEffect(() => {
