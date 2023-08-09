@@ -24,7 +24,7 @@ const NewTask = () => {
     const token = Cookies.get('accesToken');
     console.log("🚀 ~ file: NewTask.jsx:23 ~ handleSubmit ~ token:", token)
     
-    const response = await fetch(`${BASE_URL}/project/createProject/64cfb11f064e1cdb01c84dee`, {
+    const response = await fetch(`${BASE_URL}/project/createProject/${user._id}`, {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${token}`,
